@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Account Details</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 50px;
+    }
+    #Home{
+        text-decoration: none;
+        color: white;
+        font-size: 1.2rem;
+        text-align: center;
+        margin-left: 25%;
+    }
+    #logoutBtn{
+        text-decoration: none;
+        color: white;
+        font-size: 1.2rem;
+        text-align: center;
+        margin-left: 55%;
+        width: 400px;
+    }
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 400px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Profile Image */
+    .profile-image-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .profile-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info {
+      margin-top: 120px; /* To make space for profile image */
+    }
+
+    .info span {
+      font-weight: bold;
+    }
+
+    .btn {
+      background-color: #ff5733;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: #e04d2c;
+    }
+
+    .upload-container {
+      margin-top: 20px;
+    }
+
+    input[type="file"] {
+      font-size: 1rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      width: 40%;
+    }
+
+    .action-buttons .btn {
+      width: 48%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Profile Image Section -->
+  <div class="profile-image-container">
+    <img id="profileImage" src="default-avatar.jpg" alt="Profile Image">
+  </div>
+
+  <div class="container">
+    <h1>User Account Details</h1>
+    
+    <!-- Info Section -->
+    <div class="info">
+      <p><span>Name:</span> <span id="username">Loading...</span></p>
+      <p><span>Email:</span> <span id="email">Loading...</span></p>
+    </div>
+    
+    <!-- Image Upload -->
+    <div class="upload-container">
+      <label for="fileUpload" class="btn">Upload Profile Photo</label>
+      <input type="file" id="fileUpload" accept="image/*" onchange="previewImage(event)" style="display: none;">
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn" id="logoutBtn">Logout</button>
+      <a href="index.html" class="btn" id="Home">Home</a>
+    </div>
+  </div>
+
+  <script>
+    // Get user details from localStorage
+    const username = localStorage.getItem("username") || "Guest";
+    const email = localStorage.getItem("email") || "guest@example.com";
+    
+    // Set user details in the page
+    document.getElementById("username").innerText = username;
+    document.getElementById("email").innerText = email;
+
+    // Set default profile image or saved image from localStorage
+    const savedImage = localStorage.getItem("profileImage");
+    if (savedImage) {
+      document.getElementById("profileImage").src = savedImage;
+    }
+
+    // Logout functionality
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("username");
+      localStorage.removeItem("email");
+      localStorage.removeItem("profileImage");
+      alert("You have been logged out.");
+      window.location.href = "auth.html"; // Redirect to login page after logout
+    });
+
+    // Image upload preview function
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imageUrl = e.target.result;
+          document.getElementById("profileImage").src = imageUrl;
+          // Save the image in localStorage (you can save the URL if you want persistent storage)
+          localStorage.setItem("profileImage", imageUrl);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+
+</body>
+</html>

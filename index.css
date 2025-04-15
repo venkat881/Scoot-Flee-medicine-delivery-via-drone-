@@ -1,0 +1,42 @@
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+  }
+  
+  .modal-content {
+    background: #fff;
+    color: #333;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    animation: slideDown 0.4s ease-in-out;
+    position: relative;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ff5733;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

@@ -1,0 +1,78 @@
+/* title.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+  }
+  
+  .title-container {
+    text-align: center;
+    animation: fadeInUp 2s ease-in-out;
+  }
+  
+  .animated-title {
+    font-size: 4rem;
+    margin: 0;
+    animation: bounce 2s infinite alternate;
+    letter-spacing: 2px;
+  }
+  
+  .subtitle {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    animation: fadeIn 3s ease-in;
+  }
+  
+  .start-button {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    background-color: #ff5733;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .start-button:hover {
+    background-color: #e04d2c;
+    transform: scale(1.05);
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-15px);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Scoot Flee | Login / Signup</title>
+    <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+    <div class="auth-container">
+        <div class="toggle-buttons">
+            <button id="show-login">Login</button>
+            <button id="show-signup">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form active">
+            <h2>Login</h2>
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" name="username" placeholder="Enter your username" required />
+
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" placeholder="Enter your password" required />
+
+            <div id="login-error" class="error" aria-live="polite"></div>
+            <button type="button" id="login-button">Login</button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" class="auth-form">
+            <h2>Sign Up</h2>
+            <label for="signup-username">Username</label>
+            <input type="text" id="signup-username" name="username" placeholder="Choose a username" required />
+
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" placeholder="Choose a password" required />
+
+            <div id="signup-error" class="error" aria-live="polite"></div>
+            <button type="submit" id="sign-button">Create Account</button>
+        </form>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Toggle between forms
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        document.getElementById('show-login').onclick = () => {
+            loginForm.classList.add('active');
+            signupForm.classList.remove('active');
+        };
+        document.getElementById('show-signup').onclick = () => {
+            signupForm.classList.add('active');
+            loginForm.classList.remove('active');
+        };
+
+        // Redirect to index.html on login
+        document.getElementById('login-button').onclick = () => {
+            window.location.href = 'home.html'; // Redirect to the medicine page after login
+        };
+        document.getElementById('sign-button').onclick = () => {
+            window.location.href = 'home.html'; // Redirect to the medicine page after login
+        
+        };
+    </script>
+</body>
+</html>

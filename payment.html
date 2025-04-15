@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment - Scoot Flee</title>
+  <link rel="stylesheet" href="payment.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Choose Payment Method</h1>
+    <form id="paymentForm">
+      <div class="payment-options">
+        <label><input type="radio" name="payment" value="upi" required> UPI</label>
+        <label><input type="radio" name="payment" value="netbanking"> Net Banking</label>
+        <label><input type="radio" name="payment" value="credit"> Credit Card</label>
+        <label><input type="radio" name="payment" value="debit"> Debit Card</label>
+      </div>
+
+      <!-- UPI Details -->
+      <div id="upiDetails" class="details hidden">
+        <label>Enter your UPI ID:</label>
+        <input type="text" name="upiId" placeholder="example@bank" required />
+      </div>
+
+      <!-- Net Banking Details -->
+      <div id="netBankingDetails" class="details hidden">
+        <label>Select Bank:</label>
+        <select name="bank" required>
+          <option value="">Select</option>
+          <option>HDFC</option>
+          <option>SBI</option>
+          <option>ICICI</option>
+        </select>
+      </div>
+
+      <!-- Card Details -->
+      <div id="cardDetails" class="details hidden">
+        <label>Card Number:</label>
+        <input type="number" name="cardNumber" placeholder="1234 5678 9012 3456" minlength="16" maxlength="16" />
+        <label>Expiry Date:</label>
+        <input type="month" name="expiry" required />
+        <label>CVV:</label>
+        <input type="password" name="cvv" placeholder="123" minlength="3" maxlength="3" />
+      </div>
+
+      <button type="submit" class="pay-btn">Pay & Track Drone</button>
+    </form>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="spinner"></div>
+    <p>Payment Successful! Redirecting to Drone Tracking...</p>
+  </div>
+
+  <script>
+  const radios = document.querySelectorAll('input[name="payment"]');
+  const upi = document.getElementById('upiDetails');
+  const netbank = document.getElementById('netBankingDetails');
+  const card = document.getElementById('cardDetails');
+
+  const upiInput = upi.querySelector('input');
+  const bankSelect = netbank.querySelector('select');
+  const cardInputs = card.querySelectorAll('input');
+
+  function clearRequirements() {
+    upiInput.removeAttribute('required');
+    bankSelect.removeAttribute('required');
+    cardInputs.forEach(input => input.removeAttribute('required'));
+  }
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      upi.classList.add('hidden');
+      netbank.classList.add('hidden');
+      card.classList.add('hidden');
+      clearRequirements();
+
+      if (radio.value === 'upi') {
+        upi.classList.remove('hidden');
+        upiInput.setAttribute('required', 'true');
+      } else if (radio.value === 'netbanking') {
+        netbank.classList.remove('hidden');
+        bankSelect.setAttribute('required', 'true');
+      } else {
+        card.classList.remove('hidden');
+        cardInputs.forEach(input => input.setAttribute('required', 'true'));
+      }
+    });
+  });
+
+  document.getElementById("paymentForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Simulate animation
+    document.getElementById("overlay").classList.add("show");
+
+    // Redirect after animation
+    setTimeout(() => {
+      window.location.href = "tracking.html";
+    }, 3000);
+  });
+</script>
+  </script>
+</body>
+</html>

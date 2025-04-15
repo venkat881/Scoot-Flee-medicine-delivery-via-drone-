@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Track Your Drone - Scoot Flee</title>
+  <link rel="stylesheet" href="tracking.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Track Your Drone</h1>
+
+    <!-- Drone Status -->
+    <div class="drone-status">
+      <p>Tracking ID: <strong>#TXN1234567890</strong></p>
+      <div class="status-bar">
+        <div class="status-progress" id="status-progress"></div>
+      </div>
+      <p class="status-message" id="status-message">Drone on the way...</p>
+    </div>
+
+    <!-- Google Maps -->
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.837654475029!2d77.2178573150815!3d28.572082982441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce2daaa9e4c0d%3A0x5c2a2a5a5b5c5d5e!2sYour%20Location!5e0!3m2!1sen!2sin!4v1621234567890!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+      <div class="hover-text">Here's Your Drone</div>
+    </div>
+
+    <!-- Additional Tracking Info -->
+    <div class="tracking-info">
+      <p><strong>Estimated Time of Arrival (ETA):</strong> 20 minutes</p>
+      <p><strong>Current Speed:</strong> 40 km/h</p>
+      <button class="btn" onclick="reloadTracking()">Refresh Tracking</button>
+    </div>
+  </div>
+    <div class="another">
+      <span><p>Want to place another order. Click below..</p></span>
+      <br>
+      <a href="medicine.html" class="button">Order Medicine</a>
+    </div>
+  <script>
+    const statusProgress = document.getElementById("status-progress");
+    const statusMessage = document.getElementById("status-message");
+
+    let progress = 0;
+
+    // Simulate drone tracking update
+    function updateTracking() {
+      if (progress < 100) {
+        progress += 5;
+        statusProgress.style.width = progress + "%";
+      }
+
+      if (progress >= 100) {
+        statusMessage.textContent = "Drone has arrived!";
+      } else {
+        setTimeout(updateTracking, 1000); // Update every second
+      }
+    }
+
+    // Start tracking simulation when the page loads
+    window.onload = updateTracking;
+
+    // Function to refresh tracking status (simulate real-time update)
+    function reloadTracking() {
+      progress = 0;
+      statusProgress.style.width = "0%";
+      statusMessage.textContent = "Drone on the way...";
+      updateTracking();
+    }
+  </script>
+</body>
+</html>
